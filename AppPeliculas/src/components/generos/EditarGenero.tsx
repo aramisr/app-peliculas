@@ -24,7 +24,7 @@ export default function EditarGenero() {
 
     async function editar(generoEditar: generoCreacionDTO) {
         try{
-            await axios.put(`${urlGeneros}/${id}`, generoEditar);
+            await axios.put(`${urlGeneros}/EditarGenero/?id=${id}`, generoEditar);
             navigate('/generos');  
         }
         catch(error){
