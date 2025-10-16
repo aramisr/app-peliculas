@@ -13,7 +13,7 @@ export default function CrearGenero(){
     async function crear(genero: generoCreacionDTO){
         //console.log(urlGeneros);
         try {
-            await axios.post(urlGeneros, genero);
+            await axios.post(`${urlGeneros}/AddGenero`, genero);
             navigate('/generos'); 
         }
         catch (error) {
