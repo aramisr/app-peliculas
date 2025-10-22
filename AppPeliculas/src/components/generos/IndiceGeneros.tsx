@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { generoDTO } from "../../models/generos.model.d";
-import { urlGeneros } from "../../utils/endpoints";
+import { endpoints } from "../../utils/endpoints";
 import IndiceEntidad from "./IndiceEntidad";
 
 export default function IndiceGeneros() {
@@ -9,8 +9,8 @@ export default function IndiceGeneros() {
     return (
         <>
             <IndiceEntidad<generoDTO>
-                url={urlGeneros}
-                urlCrear="generos/crear"
+                url={endpoints.generos.get}
+                urlCrear={endpoints.generos.create}
                 titulo="Géneros"
                 nombreEntidad="Género"
             >
@@ -25,7 +25,7 @@ export default function IndiceGeneros() {
                         {generos?.map(genero =>
                             <tr key={genero.id}>
                                 <td>
-                                    {botones(`generos/editar/${genero.id}`, genero.id)}
+                                    {botones(`${endpoints.generos.update}/${genero.id}`, genero.id)}
                                 </td>
                                 <td>{genero.nombre}</td>
                             </tr>

@@ -1,8 +1,7 @@
 import axios from "axios";
 import FormularioActores from "./FormularioActores";
-import { urlActores } from "../../utils/endpoints";
+import { endpoints } from "../../utils/endpoints";
 import { useNavigate } from 'react-router-dom';
-import MostrarErrores from "../../utils/MostrarErrores";
 import { useState } from "react";
 import { actorCreacionDTO } from "../../models/actores.model.d";
 import { convertirActorAFormData } from "../../utils/FormDataUtil";
@@ -16,7 +15,7 @@ export default function CrearActores() {
             const formData = convertirActorAFormData(actor);
             await axios({
                 method: 'post',
-                url: urlActores,
+                url: endpoints.actores.create,
                 data: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data'

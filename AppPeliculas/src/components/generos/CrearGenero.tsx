@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { generoCreacionDTO } from "../../models/generos.model.d";
-import { urlGeneros } from "../../utils/endpoints";
+import { endpoints } from "../../utils/endpoints";
 import FormularioGeneros from "./FormularioGeneros";
 import { useNavigate } from 'react-router-dom';
 import MostrarErrores from "../../utils/MostrarErrores";
@@ -13,7 +13,7 @@ export default function CrearGenero(){
     async function crear(genero: generoCreacionDTO){
         //console.log(urlGeneros);
         try {
-            await axios.post(`${urlGeneros}/AddGenero`, genero);
+            await axios.post(endpoints.generos.create, genero);
             navigate('/generos'); 
         }
         catch (error) {

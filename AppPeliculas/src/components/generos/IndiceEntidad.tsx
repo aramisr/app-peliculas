@@ -8,7 +8,7 @@ import confirmar from "../../utils/Confirmar";
 
 export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
 
-    const [entidades, setEntidades] = useState<T[]>();
+    const [entidades, setEntidades] = useState<T[]>([]);
     const [totalDePaginas, setTotalDePaginas] = useState(0);
     const [recordsPorPagina, setRecordsPorPagina] = useState(5);
     const [pagina, setPagina] = useState(1);
@@ -19,7 +19,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
     }, [pagina, recordsPorPagina]);
 
     function cargarDatos() {
-        axios.get(`${props.url}/GetGeneros`, {
+        axios.get(props.url, {
             params: { pagina, recordsPorPagina }
         })
             .then((respuesta: AxiosResponse<T[]>) => {
@@ -29,7 +29,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
             });
     }
 
-    async function borrarGenero(id: number) {
+    async function borrar(id: number) {
         try {
             await axios.delete(`${props.url}/${id}`);
             cargarDatos()
@@ -46,7 +46,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
         <>
             <Link className="btn btn-success" to={urlEditar}>Editar</Link>      
             <Button 
-                onClick={() => confirmar(() => borrarGenero(id))}
+                onClick={() => confirmar(() => borrar(id))}
                 className="btn btn-danger">Borrar</Button>  
         </>
     );
@@ -76,7 +76,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
 
             <ListadoGenerico listado={entidades}>
                 <table className="table table-striped">
-                    {props.children(entidades!, botones)}
+                    {props.children(entidades, botones)}
                 </table>
             </ListadoGenerico>
         </>
