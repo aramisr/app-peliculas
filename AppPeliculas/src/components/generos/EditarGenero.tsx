@@ -11,7 +11,8 @@ export default function EditarGenero() {
     return (
         <>
             <EditarEntidad<generoCreacionDTO, generoDTO>
-                url={endpoints.generos.update(Number(id))}
+                urlGet={endpoints.generos.getById(Number(id))}
+                urlEditar={endpoints.generos.update(Number(id))}
                 urlIndice="/generos"
                 nombreEntidad="Genero"
             >

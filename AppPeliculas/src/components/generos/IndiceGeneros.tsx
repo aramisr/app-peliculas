@@ -25,7 +25,7 @@ export default function IndiceGeneros() {
                         {generos?.map(genero =>
                             <tr key={genero.id}>
                                 <td>
-                                    {botones(`${endpoints.generos.update}/${genero.id}`, genero.id)}
+                                    {botones(`/generos/editar/${genero.id}`, genero.id)}
                                 </td>
                                 <td>{genero.nombre}</td>
                             </tr>

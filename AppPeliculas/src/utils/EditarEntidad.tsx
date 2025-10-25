@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import MostrarErrores from "./MostrarErrores";
 import Cargando from "./CargandoContenido";
+import { endpoints } from "./endpoints";
 
 export default function EditarEntidad<TCreacion, TLectura>(props: editarEntidadProps<TCreacion, TLectura>) {
     const { id }: any = useParams();
@@ -11,7 +12,7 @@ export default function EditarEntidad<TCreacion, TLectura>(props: editarEntidadP
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(props.url)
+        axios.get(props.urlGet)
             .then((respuesta: AxiosResponse<TLectura>) => {
                 setEntidad(props.transformar(respuesta.data));
             })
@@ -19,7 +20,7 @@ export default function EditarEntidad<TCreacion, TLectura>(props: editarEntidadP
 
     async function editar(entidadEditar: TCreacion) {
         try {
-            await axios.put(props.url, entidadEditar);
+            await axios.put(props.urlEditar, entidadEditar);
             navigate(props.urlIndice);
         }
         catch (error) {
@@ -41,7 +42,8 @@ export default function EditarEntidad<TCreacion, TLectura>(props: editarEntidadP
 }
 
 interface editarEntidadProps<TCreacion, TLectura> {
-    url: string;
+    urlGet: string;
+    urlEditar: string;
     urlIndice: string;
     nombreEntidad: string;
     children(entidad: TCreacion, editar: (entidad: TCreacion) => void): ReactElement;
