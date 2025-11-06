@@ -21,7 +21,7 @@ export default function EditarEntidad<TCreacion, TLectura>(props: editarEntidadP
     async function editar(entidadEditar: TCreacion) {
         try {
             if(props.transformarFormData) {
-                 const formData = props.transformarFormData(entidadEditar);
+                const formData = props.transformarFormData(entidadEditar);
                 await axios({
                     method: 'put',
                     url: endpoints.actores.update(Number(id)),

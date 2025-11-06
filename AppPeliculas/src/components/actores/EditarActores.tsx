@@ -14,7 +14,7 @@ export default function EditarGenero() {
             nombre: actor.nombre,
             fotoURL: actor.foto,    
             biografia: actor.biografia,   
-            fechaNacimiento: actor.fechaNacimiento
+            fechaNacimiento: actor.fechaNacimiento ? new Date(actor.fechaNacimiento) : undefined
         }
     };
 
