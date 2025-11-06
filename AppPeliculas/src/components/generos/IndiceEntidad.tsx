@@ -19,7 +19,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
     }, [pagina, recordsPorPagina]);
 
     function cargarDatos() {
-        axios.get(props.url, {
+        axios.get(props.urlEnpointGet, {
             params: { pagina, recordsPorPagina }
         })
             .then((respuesta: AxiosResponse<T[]>) => {
@@ -31,7 +31,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
 
     async function borrar(id: number) {
         try {
-            await axios.delete(`${props.url}/${id}`);
+            await axios.delete(props.endpointEliminar(id));
             cargarDatos()
         }
         catch (error) {
@@ -42,9 +42,9 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
             }
         }
     }
-    const botones = (urlEditar: string, id: number) => (
+    const botones = (id: number) => (
         <>
-            <Link className="btn btn-success" to={urlEditar}>Editar</Link>      
+            <Link className="btn btn-success" to={`${props.urlEditarBase}/${id}`}>Editar</Link>      
             <Button 
                 onClick={() => confirmar(() => borrar(id))}
                 className="btn btn-danger">Borrar</Button>  
@@ -54,7 +54,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
         <>
             <h3>{props.titulo}</h3>
             <Link className="btn btn-primary" to={props.urlCrear}>Crear {props.nombreEntidad}</Link>
-            <div className="form-group" style={{width: '150px'}}>
+            <div className="form-group" style={{width: '150px'}}><br />
                 <label>Registros por página:</label>
                 <select 
                     className="form-control"
@@ -69,7 +69,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
                     <option value={50}>50</option>  
                 </select>
             </div>
-
+            
             <Paginacion cantidadTotalDePaginas={totalDePaginas} 
                 paginaActual={pagina} onChange={nuevaPagina => setPagina(nuevaPagina)}
             />
@@ -83,11 +83,13 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
     );
 }
 interface indiceEntidadProps<T> {
-    url: string;
+    urlEnpointGet: string;
     urlCrear: string;
-    children(
-        entidades: T[],
-        botones: (urlEditar: string, id: number) => ReactElement): ReactElement;
+    urlEditarBase: string;
+    endpointEliminar: (id: number) => string;
     titulo: string;
     nombreEntidad: string;
+    children(
+        entidades: T[],
+        botones: (id: number) => ReactElement): ReactElement;
 }

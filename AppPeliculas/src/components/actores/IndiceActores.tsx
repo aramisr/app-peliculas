@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { actorDTO } from "../../models/actores.model.d";
 import { endpoints } from "../../utils/endpoints";
 import IndiceEntidad from "../generos/IndiceEntidad";
@@ -7,8 +6,10 @@ export default function IndiceActores(){
     return(
         <>
             <IndiceEntidad<actorDTO>
-                url={endpoints.actores.get}
-                urlCrear={endpoints.actores.create}
+                urlEnpointGet={endpoints.actores.get}
+                urlCrear='/actores/crear'
+                urlEditarBase="/actores/editar"
+                endpointEliminar={endpoints.actores.delete}
                 titulo="Actores"
                 nombreEntidad="Actor"
             >
@@ -23,7 +24,7 @@ export default function IndiceActores(){
                         {actores?.map(actor =>
                             <tr key={actor.id}>
                                 <td>
-                                    {botones(`${endpoints.actores.update}/${actor.id}`, actor.id)}
+                                    {botones(actor.id)}
                                 </td>
                                 <td>{actor.nombre}</td>
                             </tr>

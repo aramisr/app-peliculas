@@ -20,10 +20,10 @@ export default function FormularioActores(props: formularioActoresProps){
         >
             {(formikProps) => (
                 <Form>
-                    <FormGroupText campo="nombre" label="Nombre" />
+                    <FormGroupText label="Nombre" campo="nombre" />
                     <FormGroupFecha label="Fecha Nacimiento" campo="fechaNacimiento" />
-                    <FormGroupImagen campo="foto" label="Foto" imagenURL={props.modelo.fotoURL} />
-                    <FormGroupMarkDown campo="biografia" label="Biografía" /><br />
+                    <FormGroupImagen label="Foto" campo="foto" imagenURL={props.modelo.fotoURL} />
+                    <FormGroupMarkDown label="Biografía" campo="biografia" /><br />
                     <Button disabled={formikProps.isSubmitting}
                             type="submit"
                     >Guardar</Button>

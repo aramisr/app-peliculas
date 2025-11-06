@@ -18,11 +18,11 @@ export default function FormularioGeneros(props: formularioGenerosProps){
         >
             {(formikProps) => (
                 <Form>
-                <FormGroupText campo="nombre" label="Nombre" /><br />    
-                <Button disabled={formikProps.isSubmitting} 
-                        type="submit">Guardar</Button>
-                <Link className="btn btn-secondary" to="/generos">Cancelar</Link>
-            </Form>    
+                    <FormGroupText label="Nombre" campo="nombre" /><br />    
+                    <Button disabled={formikProps.isSubmitting} 
+                            type="submit">Guardar</Button>
+                    <Link className="btn btn-secondary" to="/generos">Cancelar</Link>
+                </Form>    
             )} 
         </Formik>
     )

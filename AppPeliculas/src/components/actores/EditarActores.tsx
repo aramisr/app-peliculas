@@ -1,18 +1,41 @@
 import FormularioActores from "./FormularioActores";
+import { actorCreacionDTO, actorDTO } from "../../models/actores.model.d";
+import { endpoints } from "../../utils/endpoints";
+import EditarEntidad from "../../utils/EditarEntidad";
+import { useParams } from "react-router-dom";
+import { convertirActorAFormData } from "../../utils/FormDataUtil";
 
-export default function EditarGenero(){
-    return(
+export default function EditarGenero() {
+
+    const { id } = useParams<{ id: string }>();
+
+    const transformar = (actor: actorDTO) => { 
+        return {
+            nombre: actor.nombre,
+            fotoURL: actor.foto,    
+            biografia: actor.biografia,   
+            fechaNacimiento: actor.fechaNacimiento
+        }
+    };
+
+    return (
         <>
             <h3>Editar Actores</h3>
-            <FormularioActores 
-                modelo={{
-                    nombre: 'Tobey Maguire', 
-                    fechaNacimiento: new Date('1985-10-10T00:00:00'),
-                    biografia: `# tom ha nacido **tom**` ,
-                    fotoURL: 'https://m.media-amazon.com/images/M/MV5BNjA3N2FhNDAtZDEyZS00NTY1LTg0M2YtZWQ3ZTNlYmYyMWViXkEyXkFqcGc@._V1_QL75_UX174_.jpg'
-                }}
-                onSubmit={valores => console.log(valores)}
-            />
+            <EditarEntidad<actorCreacionDTO, actorDTO>
+                endpointGetById={endpoints.actores.getById(Number(id))}
+                endpointUpdate={endpoints.actores.update(Number(id))}
+                urlIndice="/actores"
+                nombreEntidad="Actor"
+                transformarFormData={convertirActorAFormData}
+                transformar={transformar}
+            >
+                {(entidad, editar) =>
+                    <FormularioActores
+                        modelo={entidad}
+                        onSubmit={async valores => await editar(valores)}
+                    />
+                }
+            </EditarEntidad>
         </>
     )
 }
