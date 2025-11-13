@@ -1,7 +1,7 @@
 import LandingPage from "./components/main/LandingPage";
 
 import CrearActores from "./components/actores/CrearActores";
-import EditarActores from "./components/actores/EditarActores";
+import EditarActor from "./components/actores/EditarActor";
 import IndiceActores from "./components/actores/IndiceActores";
 
 import CrearCine from "./components/cines/CrearCines";
@@ -22,7 +22,7 @@ const rutas = [
     {path: '/generos', componente: <IndiceGeneros />, exact: true},
 
     {path: '/actores/crear', componente: <CrearActores/>},
-    {path: '/actores/editar/:id', componente: <EditarActores/>},
+    {path: '/actores/editar/:id', componente: <EditarActor/>},
     {path: '/actores', componente: <IndiceActores />, exact: true},
 
     {path: '/cines/crear', componente: <CrearCine />},

@@ -7,12 +7,20 @@ import FormGroupText from "../../utils/FormGroupText"
 import FormGroupFecha from "../../utils/FormGroupFecha";
 import FormGroupImagen from "../../utils/FormGroupImagen";
 import FormGroupMarkDown from "../../utils/FormGroupMarkDown";
+import { useState } from "react";
 
 export default function FormularioActores(props: formularioActoresProps){
+    const [imagenPreview, setImagenPreview] = useState<string | undefined>(props.modelo.fotoURL);
+
     return (
         <Formik
             initialValues={props.modelo}
-            onSubmit={props.onSubmit}
+            onSubmit={(valores, acciones) => {
+                if (!(valores.foto instanceof File)) {
+                valores.foto = undefined;
+                }
+                props.onSubmit(valores, acciones);
+            }}
             validationSchema={Yup.object({
                 nombre: Yup.string().required('Este campo es requerido').primeraLetraMayuscula(),
                 fechaNacimiento: Yup.date().required('Este campo es requerido')
@@ -22,7 +30,17 @@ export default function FormularioActores(props: formularioActoresProps){
                 <Form>
                     <FormGroupText label="Nombre" campo="nombre" />
                     <FormGroupFecha label="Fecha Nacimiento" campo="fechaNacimiento" />
-                    <FormGroupImagen label="Foto" campo="foto" imagenURL={props.modelo.fotoURL} />
+                    <FormGroupImagen
+                        label="Foto"
+                        campo="foto"
+                        imagenURL={imagenPreview}
+                        onChange={(archivo: File) => {
+                        if (archivo) {
+                            setImagenPreview(URL.createObjectURL(archivo));
+                            formikProps.setFieldValue("foto", archivo);
+                        }
+                        }}
+                    />
                     <FormGroupMarkDown label="Biografía" campo="biografia" /><br />
                     <Button disabled={formikProps.isSubmitting}
                             type="submit"

@@ -5,7 +5,7 @@ import EditarEntidad from "../../utils/EditarEntidad";
 import { useParams } from "react-router-dom";
 import { convertirActorAFormData } from "../../utils/FormDataUtil";
 
-export default function EditarGenero() {
+export default function EditarActor() {
 
     const { id } = useParams<{ id: string }>();
 
@@ -20,7 +20,6 @@ export default function EditarGenero() {
 
     return (
         <>
-            <h3>Editar Actores</h3>
             <EditarEntidad<actorCreacionDTO, actorDTO>
                 endpointGetById={endpoints.actores.getById(Number(id))}
                 endpointUpdate={endpoints.actores.update(Number(id))}

@@ -8,16 +8,22 @@ export default function FormGroupImagen(props: formGroupImagenProps){
 
     const [imagenBase64, setImagenBase64] = useState('');
     const [imagenURL, setImagenURL] = useState(props.imagenURL);
-    const {values} = useFormikContext<any>();
+    const { setFieldValue } = useFormikContext<any>();
 
     const ManejarOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files){
             const archivo = e.currentTarget.files[0];
+
+            // Guardar el archivo en Formik
+            setFieldValue(props.campo, archivo);
+
+            // Notificar al padre (FormularioActores) si hay onChange
+            props.onChange?.(archivo);
+
             aBase64(archivo)
                 .then((representacionBase64: string) => setImagenBase64(representacionBase64))
                 .catch(error => console.error(error))
             
-                values[props.campo] = archivo;
             setImagenURL('');
         }
     }
@@ -44,13 +50,13 @@ export default function FormGroupImagen(props: formGroupImagenProps){
                     </div>
                 </div> : null
             }
-            {imagenURL ?
+            {!imagenBase64 && imagenURL && (
                 <div>
                     <div style={divStyle}>
-                        <img style={imgStyle} src={imagenURL} alt="imagen seleccionada" />
+                        <img style={imgStyle} src={imagenURL} alt="imagen actual" />
                     </div>
-                </div> : null
-            }
+                </div> 
+            )}
         </div>
     )
 }
@@ -58,6 +64,7 @@ interface formGroupImagenProps{
     campo: string;
     label: string;
     imagenURL: string;
+    onChange?: (archivo: File) => void;
 }
 
 FormGroupImagen.defaultProps = {

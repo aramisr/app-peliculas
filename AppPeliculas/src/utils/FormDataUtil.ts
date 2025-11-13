@@ -1,5 +1,3 @@
-import { actorCreacionDTO } from '../models/actores.model.d';
-
 export function convertirActorAFormData(actor: any): FormData {
     const formData = new FormData();
 
