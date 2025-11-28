@@ -1,6 +1,6 @@
 import { actorDTO } from "../../models/actores.model.d";
 import { endpoints } from "../../utils/endpoints";
-import IndiceEntidad from "../generos/IndiceEntidad";
+import IndiceEntidad from "../../utils/IndiceEntidad";
 
 export default function IndiceActores(){
     return(

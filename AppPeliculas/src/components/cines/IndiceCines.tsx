@@ -1,10 +1,37 @@
-import { Link } from "react-router-dom";
+import { cineDTO } from "../../models/cines.model.d";
+import { endpoints } from "../../utils/endpoints";
+import IndiceEntidad from "../../utils/IndiceEntidad";
 
 export default function IndiceCines(){
     return(
-        <>
-            <h3>Indice Cine</h3>
-            <Link to="/cines/crear">Crear Cine</Link>
+       <>
+            <IndiceEntidad<cineDTO>
+                urlEnpointGet={endpoints.cines.get}
+                urlCrear={endpoints.cines.create}
+                urlEditarBase="/cines/editar"
+                endpointEliminar={endpoints.cines.delete} 
+                titulo="Cines"
+                nombreEntidad="Cine"
+            >
+                {(cines, botones) => <>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cines?.map(cine =>
+                            <tr key={cine.id}>
+                                <td>
+                                    {botones(cine.id)}
+                                </td>
+                                <td>{cine.nombre}</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </>}
+            </IndiceEntidad>
         </>
     )
 }

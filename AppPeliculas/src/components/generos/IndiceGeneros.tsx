@@ -1,6 +1,6 @@
 import { generoDTO } from "../../models/generos.model.d";
 import { endpoints } from "../../utils/endpoints";
-import IndiceEntidad from "./IndiceEntidad";
+import IndiceEntidad from "../../utils/IndiceEntidad";
 
 export default function IndiceGeneros() {
 

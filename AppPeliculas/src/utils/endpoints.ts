@@ -16,6 +16,14 @@ export const endpoints = {
     create: `${apiURL}/actores/AddActor`,
     update: (id: number) => `${apiURL}/actores/UpdateActor/${id}`,
     delete: (id: number) => `${apiURL}/actores/DeleteActor/${id}`
+  },
+  cines: {
+    base: `${apiURL}/cines`,
+    get: `${apiURL}/cines/GetCines`,
+    getById: (id: number) => `${apiURL}/cines/GetById/${id}`,
+    create: `${apiURL}/cines/AddCine`,
+    update: (id: number) => `${apiURL}/cines/UpdateCine/${id}`,
+    delete: (id: number) => `${apiURL}/cines/DeleteCine/${id}`
   }
 };
 

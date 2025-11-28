@@ -1,10 +1,10 @@
 import { ReactElement, useEffect, useState } from "react";
-import Paginacion from "../../utils/Paginacion";
+import Paginacion from "./Paginacion";
 import { Link } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
-import ListadoGenerico from "../../utils/ListadoGenerico";
-import Button from "../../utils/Button";
-import confirmar from "../../utils/Confirmar";
+import ListadoGenerico from "./ListadoGenerico";
+import Button from "./Button";
+import confirmar from "./Confirmar";
 
 export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
 

@@ -1,10 +1,10 @@
-import axios, { AxiosError } from "axios";
-import { generoCreacionDTO } from "../../models/generos.model.d";
-import { endpoints } from "../../utils/endpoints";
+import axios from "axios";
 import FormularioGeneros from "./FormularioGeneros";
+import { endpoints } from "../../utils/endpoints";
 import { useNavigate } from 'react-router-dom';
-import MostrarErrores from "../../utils/MostrarErrores";
 import { useState } from "react";
+import { generoCreacionDTO } from "../../models/generos.model.d";
+import MostrarErrores from "../../utils/MostrarErrores";
 
 export default function CrearGenero(){
     const navigate = useNavigate(); 
@@ -30,9 +30,7 @@ export default function CrearGenero(){
             <h3>Crear Género</h3>
             <MostrarErrores errores={errores} />
             <FormularioGeneros modelo={{nombre: ''}} 
-                onSubmit={async valores => {
-                    await crear(valores);
-                }}
+                onSubmit={async valores => {await crear(valores);}}
             />
         </>
     )
