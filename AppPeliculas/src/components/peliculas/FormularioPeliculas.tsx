@@ -13,6 +13,7 @@ import { cineDTO } from "../../models/cines.model.d";
 import { useState } from "react";
 import TypeAheadActores from "../actores/TypeAheadActores";
 import { actorPeliculaDTO } from "../../models/actores.model.d";
+import FormGroupMarkDown from "../../utils/FormGroupMarkDown";
 
 export default function FormularioPeliculas(props: formularioPeliculasProps){
     const [generosSeleccionados, setGenerosSeleccionados] = useState(mapear(props.generosSeleccionados));
@@ -49,7 +50,8 @@ export default function FormularioPeliculas(props: formularioPeliculasProps){
                     <FormGroupFecha campo="fechaLanzamiento" label="Fecha de lanzamiento" /><br />
                     <FormGroupImagen campo="poster" label="Poster" 
                         imagenURL={props.modelo.posterURL} 
-                    /><br /> 
+                    />
+                    <FormGroupMarkDown campo="resumen" label="Resumen" /><br /> 
 
                     <div className="form-group">
                         <label>Géneros: </label>

@@ -4,10 +4,10 @@ import IndiceEntidad from "../../utils/IndiceEntidad";
 
 export default function IndiceCines(){
     return(
-       <>
+        <>
             <IndiceEntidad<cineDTO>
                 urlEnpointGet={endpoints.cines.get}
-                urlCrear={endpoints.cines.create}
+                urlCrear="/cines/crear"
                 urlEditarBase="/cines/editar"
                 endpointEliminar={endpoints.cines.delete} 
                 titulo="Cines"

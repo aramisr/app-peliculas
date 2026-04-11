@@ -8,7 +8,7 @@ export default function IndiceGeneros() {
         <>
             <IndiceEntidad<generoDTO>
                 urlEnpointGet={endpoints.generos.get}
-                urlCrear={endpoints.generos.create}
+                urlCrear="/generos/crear"
                 urlEditarBase="/generos/editar"
                 endpointEliminar={endpoints.generos.delete} 
                 titulo="Géneros"

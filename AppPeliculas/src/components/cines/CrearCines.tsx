@@ -4,6 +4,7 @@ import { endpoints } from "../../utils/endpoints";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { cineCreacionDTO } from "../../models/cines.model.d";
+import MostrarErrores from "../../utils/MostrarErrores";
 
 export default function CrearCines(){
     const navigate = useNavigate(); 
@@ -25,6 +26,7 @@ export default function CrearCines(){
     return(
         <>
             <h3>Crear Cine</h3>
+            <MostrarErrores errores={errores} />
             <FormularioCines 
                 modelo={{nombre: ''}} 
                 onSubmit={async valores => await crear(valores)} 

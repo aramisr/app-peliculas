@@ -24,6 +24,15 @@ export const endpoints = {
     create: `${apiURL}/cines/AddCine`,
     update: (id: number) => `${apiURL}/cines/UpdateCine/${id}`,
     delete: (id: number) => `${apiURL}/cines/DeleteCine/${id}`
+  },
+  peliculas: {
+    base: `${apiURL}/peliculas`,
+    postget: `${apiURL}/peliculas/PostGet`,
+    get: `${apiURL}/peliculas/GetPeliculas`,
+    getById: (id: number) => `${apiURL}/peliculas/GetById/${id}`,
+    create: `${apiURL}/peliculas/AddPelicula`,
+    update: (id: number) => `${apiURL}/peliculas/UpdatePelicula/${id}`,
+    delete: (id: number) => `${apiURL}/peliculas/DeletePelicula/${id}`
   }
 };
 
